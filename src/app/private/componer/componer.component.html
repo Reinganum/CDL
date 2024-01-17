@@ -1,0 +1,20 @@
+<div class="container">
+    <h1 class="mt-4 text-center">Crear nueva publicación</h1>
+    <form class="d-flex flex-column" [formGroup]="composeForm" (ngSubmit)="submit()">
+        <input formControlName="title" type="text" class="form-control mt-5" placeholder="Ingresa un título a la publicación">
+        <textarea formControlName="body"
+                  type="textarea" 
+                  rows="10" 
+                  cols="50" 
+                  class="form-control mt-2"
+                  placeholder="Aquí va el contenido de tu artículo..."
+                  maxlength="2500"></textarea>
+        <p class="text-end"> {{ composeForm.get('body')?.value?.length ?? 0 }} / 2500</p>
+        <b><label for="file" class="mb-1">Cargar una imagen de la publicación.</label></b>
+        <input type="file" id="file" (change)="onFileSelected($event)" accept="image/*" />
+        <div class="d-flex justify-content-center">
+            <button [disabled]="!composeForm.valid" type="submit" class="btn btn-dark mt-2">Publicar</button>
+            <button type="reset" class="btn btn-dark mt-2 mx-2" (click)="reset"> Limpiar </button>
+        </div>
+    </form>
+</div>

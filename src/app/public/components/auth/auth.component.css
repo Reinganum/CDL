@@ -1,0 +1,32 @@
+input {
+    margin-bottom: 1rem;
+  }
+
+input::placeholder{
+    color: lightgray;
+    font-size: small;
+}
+
+.btn {
+    background-color: #cf2e2e;
+    font-weight: bold;
+    border-radius: 24px;
+    width: 12rem;
+    margin: auto;
+    color: white;
+}
+
+.card{
+    z-index: 999;
+}
+
+a{
+    text-decoration: none;
+    cursor: pointer;
+    color: gray;
+}
+
+p{
+    font-size: 1.2rem;
+    color: rgb(98, 95, 95);
+}

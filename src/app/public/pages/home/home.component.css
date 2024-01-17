@@ -1,0 +1,14 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+.example-header-image {
+    background-image: url(https://tuplanbanmedica.cl/wp-content/uploads/2021/12/banmedica-familia.jpg);
+    background-size: cover;
+}
+
+.home-row{
+    background-image: url(https://tuplanbanmedica.cl/wp-content/uploads/2021/12/banmedica-familia.jpg);
+    background-size: cover;
+    height: 90vh;
+}

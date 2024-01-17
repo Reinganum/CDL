@@ -1,0 +1,98 @@
+<div class="p-5">
+    <div class="pb-2">
+        <h4 class="text-center">Agregar paciente</h4>
+    </div>
+    <form [formGroup]="patientForm" class="mt-2" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <select class="form-select" aria-label="Default select example" formControlName="type">
+                <option selected>Tipo paciente</option>
+                <option value="adulto">Adulto</option>
+                <option value="infanto">Infanto juvenil</option>
+            </select>
+        </div>
+        <div *ngIf="patientType!=='Tipo paciente'">
+            <div class="row mt-2">
+                <div class="col-6">
+                    <label for="names">Nombre(s)</label>
+                    <input type="text" name="names" class="form-control" formControlName="firstName">
+                </div>
+                <div class="col-6">
+                    <label for="names">Apellidos</label>
+                    <input type="text" name="lastName" class="form-control" formControlName="lastName">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="telefono">Teléfono</label>
+                    <input type="number" name="mobile" class="form-control" formControlName="mobile">
+                </div>
+                <div class="col-6">
+                    <label for="correo">Correo</label>
+                    <input type="text" name="email" class="form-control" formControlName="email">
+                </div>
+            </div>
+            <label for="direccion">Dirección</label>
+            <input type="text" name="address" class="form-control" formControlName="address">
+            <div class="row py-4">
+                <div class="col-6">
+                    <mat-form-field class="w-100">
+                        <mat-label>Fecha de la nacimiento</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dob">
+                        <mat-hint>DD/MM/AAAA</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <label for="rut">RUT</label>
+                    <input type="text" name="rut" class="form-control" placeholder="12345678-9" formControlName="rut">
+                </div>
+                <div>
+                    <label for="ocupacion">{{ patientType === 'infanto' ? 'Colegio' : 'Ocupación' }}</label>
+                    <input type="text" name="ocupacion" class="form-control" formControlName="occupation">
+                </div>
+                <h4>{{ patientType === 'infanto' ? 'Datos cuidador/a' : 'Datos contacto de emergencia' }}</h4>
+                <div class="">
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <label for="names">Nombre(s)</label>
+                            <input type="text" name="names" class="form-control" formControlName="cFirstName">
+                        </div>
+                        <div class="col-6">
+                            <label for="names">Apellidos</label>
+                            <input type="text" name="surnames" class="form-control" formControlName="cLastName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" name="telefono" class="form-control" formControlName="cMobile">
+                        </div>
+                        <div class="col-6">
+                            <label for="correo">Correo</label>
+                            <input type="text" name="correo" class="form-control" formControlName="cEmail">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" name="direccion" class="form-control" formControlName="cAddress">
+                        </div>
+                        <div class="col-6">
+                            <label for="relacion">Relación con el paciente</label>
+                            <input type="text" name="relacion" class="form-control" formControlName="cRole">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="rut">RUT</label>
+                            <input type="text" name="rut" class="form-control" placeholder="12345678-9" formControlName="cRut">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button [disabled]="patientForm.invalid" class="btn btn-dark" type="submit">Guardar</button>
+            <button class="btn btn-dark ms-2" type="reset">Limpiar</button>
+        </div>
+    </form>
+</div>

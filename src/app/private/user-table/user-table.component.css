@@ -1,0 +1,38 @@
+.mat-mdc-table {
+ background-color: lightgray; 
+}
+.mat-mdc-header-cell {
+    background-color: grey!important;
+    
+}
+.mat-mdc-cell{
+    color: black;
+}
+
+.demo-toggles {
+    display: flex;
+    flex-direction: column;
+}
+  
+.demo-toggles * {
+    margin-bottom: 16px;
+    color: black;
+}
+
+.demo-options {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+
+.demo-data * {
+    margin: 16px 0;
+}
+
+.demo-paginator {
+    width: 600px;
+}
+
+.demo-paginator{
+    border-radius: 12px ;
+}

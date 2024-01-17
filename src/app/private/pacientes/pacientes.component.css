@@ -1,0 +1,38 @@
+.patient-data-container {
+    border: solid 1px black;
+    border-radius: 4px; 
+}
+
+.new-session-card input,label{
+    margin-bottom: 1rem;
+}
+
+.session-text {
+    cursor: pointer;
+    text-align: justify;
+}
+
+.icon{
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+}
+.container{
+    min-height: 100vh;
+}
+
+td {
+    font-weight: bold;
+}
+
+.dato-contacto{
+    padding-left: 10rem;
+}
+
+.hidden-icon{
+    visibility: hidden;
+}
+
+.session:hover .hidden-icon{
+    visibility: visible;
+}

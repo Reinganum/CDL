@@ -1,0 +1,32 @@
+<div class="mt-2 card p-4 mt-5 shadow-lg" *ngIf="!showLogin">
+    <form [formGroup]="registerForm" class="form d-flex flex-column align-center" (ngSubmit)="register()">
+        <p class="py-2">Si aún no eres miembro, ingresa tus datos y nos comunicaremos contigo</p>
+        <input autofocus="true" [value]="registerForm.get('firstName')?.value | titlecase" formControlName="firstName" type="text" class="form-control" placeholder="Nombre" aria-describedby="errors">
+        <input [value]="registerForm.get('lastName')?.value | titlecase" formControlName="lastName" type="text" class="form-control" placeholder="Apellido">
+        <input formControlName="mobile" type="number" class="form-control" placeholder="Teléfono">
+        <input formControlName="email" type="text" class="form-control" placeholder="Email">
+        <label for="file">Cargar avatar</label>
+        <input type="file" id="file" (change)="onFileSelected($event)" accept="image/*" />
+        <mat-form-field>
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob">
+            <mat-hint>DD/MM/AAAA</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <input formControlName="password" type="password" class="form-control" placeholder="Contraseña">
+        <input formControlName="confirmationPass" type="password" class="form-control" placeholder="Confirmar contraseña">
+        <button class="btn" type="submit" [disabled]="registerForm.invalid">Enviar</button> 
+        <a class="text-center mt-2" (click)="changeForm()"> ¿Ya tienes una cuenta? Ingresa aquí. </a>           
+    </form>
+</div>
+
+<div class="mt-2 card p-4 mt-5 shadow-lg" *ngIf="showLogin">
+    <form [formGroup]="loginForm" class="form d-flex flex-column align-center" (ngSubmit)="login()">
+        <p class="py-2 text-center">Ingresa a tu Nueva Sucursal Virtual</p>
+        <input autofocus="true" [value]="loginForm.get('email')?.value | titlecase" formControlName="email" type="text" class="form-control" placeholder="Usuario" aria-describedby="errors">
+        <input formControlName="password" type="password" class="form-control" placeholder="Contraseña">
+        <button class="btn" type="submit" [disabled]="loginForm.invalid">Enviar</button>        
+        <a class="text-center mt-2" (click)="changeForm()"> ¿Todavía no eres usuario? Crear nueva cuenta. </a>      
+    </form>
+</div>

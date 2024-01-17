@@ -1,0 +1,28 @@
+
+.week-schedule {
+  display: flex;
+}
+
+.day-column {
+  flex: 1;
+  border: 1px solid #ddd;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.day-header {
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+/* Add more specific styling for your schedule content if needed */
+.schedule-item {
+  background-color: #e0e0e0;
+  padding: 8px;
+  margin-bottom: 5px;
+  height: 5rem;
+}
+

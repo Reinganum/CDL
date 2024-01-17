@@ -1,0 +1,33 @@
+<div class="container">
+    <h1 class="text-center mt-5">{{ months[ selectedDate.getMonth() ] + ' - ' + selectedDate.getFullYear() }}</h1>
+    <div class="d-flex flex-grow-1 justify-content-center align-items-center">
+        <img src="../../../../assets/arrow-back.svg" alt="" class="mb-2 mx-2" (click)="substractDays()">
+        <h2 class="text-center">Semana: {{ weekOfYear }}</h2>
+        <img src="../../../../assets/arrow-forward.svg" alt="" class="mb-2 mx-2" (click)="addDays()">
+    </div>
+    <div class="week-schedule mt-5" *ngIf='sessions'>
+      <div class="day-column" *ngFor="let day of weekDays; let i = index"
+           (drop)="onDrop( i + 1)"
+           (dragover)="onDragOver($event)">
+        <div class="day-header">{{ day }} {{ daysInWeek[i][0] }}</div>
+        <div class="schedule-item text-center"
+             *ngFor="let session of filterSessions(i + 1)"
+             (dragstart)="onDragStart(session)"
+             draggable="true">
+          <div>
+            <p> {{ session.attendantName + ' ' + session.attendantLastname }} </p>
+            <p> {{ session.hour }} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="myForm" class="mt-4">
+        <mat-form-field>
+            <mat-label>Semana</mat-label>
+            <input matInput [matDatepicker]="picker" (dateChange)="chooseDate()" formControlName="fecha">
+            <mat-hint>DD/MM/AAAA</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </form>
+  </div>

@@ -1,0 +1,33 @@
+.rrss-container{
+    position: fixed;
+    bottom: 40%; /* Adjust as needed to position it at the middle vertically */
+    right: 0;
+    height: 10rem;
+    width: 3rem;
+}
+
+.img-container{
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 10rem 0.5rem 0.5rem;
+    border-radius: 12px 0 0 12px;
+    cursor: pointer;
+}
+.img-container:hover{
+    transform: translateX(-1.4rem);   
+}
+
+#wsp{
+    background-color: #25D366;
+}
+#fb{
+    background-color: #3B4D71;
+}
+#tw{
+    background-color: #2bc4ff;
+}
+
+img{
+    height: 1.5rem;
+    width: 1.5rem;
+    border: none;
+}

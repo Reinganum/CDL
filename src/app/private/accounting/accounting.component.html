@@ -1,0 +1,43 @@
+<h4 class="text-center py-4">Reporte ingresos</h4>
+<div class="d-flex justify-content-center">
+    <div id="chart" class="w-50" style="text-align:center">
+        <apx-chart 
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [title]="chartOptions.title"
+        ></apx-chart>
+    </div>
+</div>
+<form [formGroup]="fechasForm">
+    <div class="d-flex justify-content-center mt-5">
+        <mat-form-field>
+            <mat-label>Fecha de inicio</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaInicio">
+            <mat-hint>DD/MM/AAAA</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="mx-4">
+            <mat-label>Fecha de término</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="fechaFin">
+            <mat-hint>DD/MM/AAAA</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button (click)="seleccionarPeriodo()" class="btn btn-dark">Buscar</button>
+    </div>
+</form>
+<h4 class="text-center py-4">Uso del tiempo de sesiones</h4>
+<div id="donutChart">
+    <apx-chart
+      [series]="donutChartOptions.series"
+      [chart]="donutChartOptions.chart"
+      [labels]="donutChartOptions.labels"
+      [responsive]="donutChartOptions.responsive"
+    ></apx-chart>
+</div>
+
+

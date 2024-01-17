@@ -1,0 +1,12 @@
+.logo{
+    max-height: 4rem;
+}
+
+#user-icon{
+    border: solid 2px whitesmoke;
+    margin-left: auto;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+}

@@ -1,0 +1,122 @@
+<div class="container">
+    <div class="row mt-2"  *ngIf="patient" >
+        <div class="col-12 card shadow-lg p-3">
+            <div class="row">
+                <div class=" card-body col-4 d-flex flex-column data-card">
+                    <p><b>Nombre:</b>  {{ patient.firstName + ' ' + patient.lastName }}</p> 
+                    <p> <b>Edad:</b> {{ patient.dob | calculateAge }}</p>
+                    <!-- <p> <b>Sesiones:</b> {{ patient.sessions?.length }}</p> -->
+                </div>
+                <div class="card-body col-4 d-flex flex-column data-card">
+                    <p><b>Fecha ingreso:</b> {{ patient.startDate }}</p>
+                    <p><b>Contacto:</b> {{ patient.contactNumber }}</p>
+                </div>
+                <div class="card-body col-4 d-flex flex-column data-card">
+                    <p><b>Email: </b>{{ patient.email }}</p>
+                    <p><b>Tipo paciente:</b>{{ patient.type }}</p>
+                    <p><b>Tarifa:</b>{{ patient.fee }}</p>
+                </div>
+            </div>
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Visualizar información contacto emergencia
+                  </mat-panel-title>
+                  <mat-panel-description>
+                   ( Nombre completo, Número contacto, Correo, Dirección, Relación con el paciente )
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="card p-3">
+                    <table>
+                        <tr>
+                            <td>Nombre Completo: </td>
+                            <td class="dato-contacto">{{ caregiver?.cfirstName + ' ' + caregiver.clastname }}</td>
+                        </tr>
+                        <tr>
+                            <td>Número contacto: </td>
+                            <td class="dato-contacto">{{ caregiver?.cmobile }} </td>
+                        </tr>
+                        <tr>
+                            <td>Correo electrónico: </td>
+                            <td class="dato-contacto">{{ caregiver?.cemail }}</td>
+                        </tr>
+                        <tr>
+                            <td>Dirección completa: </td>
+                            <td class="dato-contacto">{{ caregiver?.caddress }}</td>
+                        </tr>
+                        <tr>
+                            <td>Relación con el paciente: </td>
+                            <td class="dato-contacto">{{ caregiver?.croles }}</td>
+                        </tr>
+                     </table>
+                </div>
+              </mat-expansion-panel>
+        </div>
+    </div>
+    <div class="row mt-2"  *ngIf="patient" >
+       <div class="col-12 col-md-6 card" *ngIf="(patient.sessions.length && !hideSessionPanel)">
+        <img src="../../../assets/hide.svg" class="icon my-4 hide-icon" alt="hide-icon" matTooltip="Esconder sesiones" (click)="hidePanel()">
+        <h5 class="text-center py-4">{{ 'Registro de sesiones anteriores' }}</h5>
+        <div class="card p-2 session" *ngFor="let session of sessions; let i = index">
+            <p><b>{{ session.date }}</b></p>
+            <div class="d-flex flex-row justify-content-apart">
+                <div>
+                    <p [id]="i" class="session-text" (click)="toggleExpand(i)">{{ expandedSessionId === i ? session.content : session.content.slice(0,50) + '...'}}</p>
+                </div>
+                <div class="mx-2" style="display: flex; flex-grow: 1!important; justify-content: end;">
+                    <img class="icon hidden-icon" src="../../../assets/print.svg" alt="" matTooltip="imprimir" (click)="print(patient.fullName, session.abstract, i+1)">
+                    <img class="icon hidden-icon" src="../../../assets/download.svg" alt="" matTooltip="descargar" (click)="download(patient.fullName, session.abstract, i+1)">
+                    <img class="icon hidden-icon" src="../../../assets/edit-session.svg" alt="" matTooltip="edit" (click)="editSession(session, i)">
+                    <img class="icon hidden-icon" src="../../../assets/delete-session.svg" alt="" matTooltip="delete" (click)="deleteSession(i)">
+                </div>
+            </div>
+        </div>
+       </div>
+       <div class="col-12 col-md-6 card new-session-card" [ngClass]="(!patient.sessions.length || hideSessionPanel) ? 'col-md-10 col-lg-10 centrado p-5' : 'col-6'" >
+        <img *ngIf="hideSessionPanel" src="../../../assets/hide.svg" class="icon my-4 hide-icon left" alt="hide-icon" matTooltip="Mostrar sesiones" (click)="hidePanel()">
+        <h5 class="text-center py-4">{{ patient.sessions.length ? 'Ingresar nueva sesión' : 'Registrar primera sesión del paciente' }}</h5>
+        <div [formGroup]="myForm" class="form d-flex flex-column align-center">
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field class="mb-2">
+                        <mat-label>Fecha de la sesión</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="date">
+                        <mat-hint>DD/MM/AAAA</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="nombre"><b>Nombres de la persona asistente a la sesión: </b></label>
+                    <input autofocus="true" name="nombre" [value]="patient.firstName | titlecase" formControlName="attendantName" type="text" class="form-control" placeholder="Nombres">
+                </div>
+                <div class="col-6">
+                    <label for="nombre"><b>Apellidos de la persona asistente a la sesión: </b></label>
+                    <input autofocus="true" name="nombre" [value]="patient.lastName | titlecase" formControlName="attendantLastname" type="text" class="form-control" placeholder="Apellidos">
+                </div>
+            </div>
+            <label for="session-number"><b>N° de sesión: </b></label>
+            <input name="session-number" type="number" formControlName="sessions">
+            <label for="session-body"><b>Resumen de la sesión: </b></label>
+            <textarea formControlName="content"
+                name="session-body"
+                  type="textarea" 
+                  rows="10" 
+                  cols="50" 
+                  class="form-control mt-2"
+                  placeholder="Aquí va el contenido de la sesión..."
+                  maxlength="2500"></textarea>
+            <p class="text-end"> {{ myForm.get('content')?.value?.length ?? 0 }} / 2500</p>
+            <label for="file">Cargar documento.</label>
+            <input type="file" id="file" (change)="onFileSelected($event)" accept="image/*" />
+            <button class="btn btn-dark" (click)="saveSession()">Enviar</button>            
+        </div>
+       </div>
+    </div>
+</div>
+

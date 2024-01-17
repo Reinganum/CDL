@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 card shadow-lg mt-5 p-3">
+            <h4>Búsqueda pacientes</h4>
+            <form class="form" class="mt-2" [formGroup]="searchForm" (ngSubmit)="buscar()">
+                <mat-form-field class="mx-1">
+                    <mat-label>Pacientes</mat-label>
+                    <select matNativeControl formControlName="fullName">
+                      <option *ngFor="let patient of fetchedPatients" [value]="patient.fullName">{{ patient.fullName }}</option>
+                    </select>
+                </mat-form-field>
+                <mat-form-field class="mx-1">
+                    <mat-label>Estado</mat-label>
+                    <select matNativeControl  formControlName="state">
+                      <option>Activo</option>
+                      <option>De alta</option>
+                    </select>
+                </mat-form-field>
+                <mat-form-field class="mx-1">
+                    <mat-label>Tipo paciente</mat-label>
+                    <select matNativeControl formControlName="type">
+                      <option>Infanto-juvenil</option>
+                      <option>Adulto</option>
+                    </select>
+                </mat-form-field>
+                <mat-form-field class="mx-1">
+                    <mat-label>Fecha ingreso desde</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date">
+                    <mat-hint>DD/MM/AAAA</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <button class="btn btn-dark mx-1" type="submit">Buscar</button>
+                <button class="btn btn-dark mx-1" (click)="reset()">Limpiar</button>
+            </form>
+        </div>
+    </div>
+    <div (click)="showModal()">
+        <button class="btn btn-dark mt-2"><img class="icon add-patient mx-2" src="../../../assets/add-patient.svg" alt="add-patient">Agregar paciente</button>
+    </div>
+    <div class="mt-4 text-center" *ngIf="fetchedPatients?.length===0">
+        <h1>No tienes pacientes registrados</h1>
+    </div>
+    <div class="" *ngIf="fetchedPatients">
+        <div class="card shadow-lg p-2 my-2" *ngFor="let patient of fetchedPatients">
+            <div class="row">
+                <div class=" card-body col-4 d-flex flex-column data-card">
+                    <p><b>Nombre:</b>  {{ patient.firstName + ' ' + patient.lastName }}</p> 
+                    <p> <b>Edad:</b> {{ patient.dob | calculateAge }}</p>
+                    <p> <b>Sesiones:</b> <img src="../../../assets/edit-session.svg" alt="" class="icon" (click)="patientDetail(patient._id)"></p>
+                </div>
+                <div class="card-body col-4 d-flex flex-column data-card">
+                    <p><b>Fecha ingreso:</b> {{ patient.dob }}</p>
+                    <p><b>Contacto:</b> {{ patient.mobile }}</p>
+                </div>
+                <div class="card-body col-4 d-flex flex-column data-card">
+                    <p><b>Email: </b>{{ patient.email }}</p>
+                    <p><b>Tipo paciente:</b>{{ patient.type }}</p>
+                    <p><b>Tarifa:</b>{{ patient.fee }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

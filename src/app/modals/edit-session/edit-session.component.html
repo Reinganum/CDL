@@ -1,0 +1,21 @@
+<div class="container">
+    <h5 class="pt-5 text-center">Editar sesión</h5>
+    <form [formGroup]="editForm" class="p-4">
+        <label for="nombre"><b>Nombre persona asistente a la sesión: </b></label>
+            <input autofocus="true" name="nombre" formControlName="fullName" type="text" class="form-control" placeholder="Nombre" aria-describedby="errors">
+            <label for="session-number"><b>N° de sesión: </b></label>
+            <input name="session-number" class="form-control" formControlName="sessions">
+            <label for="session-body"><b>Resumen de la sesión: </b></label>
+        <textarea formControlName="body"
+                        name="session-body"
+                        type="textarea" 
+                        rows="10" 
+                        cols="50" 
+                        class="form-control mt-2"
+                        placeholder="Aquí va el contenido de la sesión..."
+                        maxlength="2500"></textarea>
+                    <p class="text-end"> {{ editForm.get('body')?.value?.length ?? 0 }} / 2500</p>
+        <button [disabled]="editForm.invalid" class="btn btn-dark" (click)="saveAndClose()">Guardar</button>
+        <button class="btn btn-dark ms-2" type="reset">Limpiar</button>
+    </form>
+</div>
